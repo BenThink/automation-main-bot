@@ -18,8 +18,8 @@ Logic-Flow: main.js -> mainControl.js -> startBotActions.js -> logIn.js -> attac
 2. logs in the player
 3. checks if the loggin was successful, if not -> it has 2 more attempts to re-log in, if still fails -> stops execution
 4. clicks on Battle menu, checks if battle is on, if off -> checks if enemy's name is correct, if yes -> fights a player chosen by the user, if not -> displays an error and continues with next step
-5. clicks on Adventure menu, collects data from 5 different adventures, compares them and chooses the most efficient one based on experience / time
-6. clicks on Guild menu, checks if the player has enough gold & if he's a member of a guild, if yes -> donates the amount of gold chosen by the user, if not -> displays an error 
+5. clicks on Adventure menu, collects data from 5 different adventures, compares them and chooses the most efficient one based on experience / time, if it fails -> displays an error and continues with next step
+6. clicks on Guild menu, checks if the player has enough gold & if is a member of a guild, if yes -> donates the amount of gold chosen by the user, if not -> displays an error and continues with next step 
 7. logs out the player
 8. closes the browser instance
 9. waits for adventure's time to finish (doesn't wait for the last adventure)
