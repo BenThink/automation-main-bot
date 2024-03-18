@@ -35,6 +35,7 @@ Logic-Flow: main.js -> mainControl.js -> startBotActions.js -> logIn.js -> attac
 The bot catches 10 errors, from which:
    - handles 5 major errors
    - the rest of 5 medium errors are not disrupting the process of the bot and they can be fixed automatically or manually in the next process
+
  
    *Here's a Print Screen of the bot in action:*
  ![image](https://github.com/BenThink/automation-main-bot/assets/28758782/51799d84-3f5f-47f1-b73b-fe30f31a43e2)
