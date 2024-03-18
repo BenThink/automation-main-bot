@@ -13,8 +13,8 @@ It was built using *Puppeteer / JavaScript / Node.js*
 *Based on the data collected it does the following steps:*
 1. opens chrome & new page
 2. logs in the player
-3. checks if the loggin was successful, if not -> it has 2 more attempts to re log in
-4. clicks on Battle menu, checks if battle is on, if off -> fights a player chosen by the user
+3. checks if the loggin was successful, if not -> it has 2 more attempts to re-log in, if not -> stops execution
+4. clicks on Battle menu, checks if battle is on if off -> fights a player chosen by the user
 5. clicks on Adventure menu, collects data from 5 different adventures, compares them and chooses the most efficient one based on experience / time
 6. clicks on Guild menu, checks if the player has enough gold & if he's a member of a guild, if yes -> donates the amount of gold chosen by the user
 7. logs out the player
@@ -29,9 +29,10 @@ It was built using *Puppeteer / JavaScript / Node.js*
    - no. of battle
    - overall donated gold
 
-The bot catches 8 errors related to the written code, from which:
+The bot catches 10 errors related to the written code, from which:
    - handles 5 major ones
-   - the rest of 3 are not disrupting the process of the bot and they can/may be fixed automatically in the next process
+   - the rest of 5 are not disrupting the process of the bot and they can be fixed automatically or manually in the next process
  
    *Here's a Print Screen of the bot in action:*
- ![image](https://github.com/BenThink/automation-main-bot/assets/28758782/6b5a2781-a429-45fd-b15b-8dc2a7f1afb8)
+ ![image](https://github.com/BenThink/automation-main-bot/assets/28758782/f14e3d72-43a7-4c39-8bf7-3b2aa177dfb4)
+
