@@ -44,9 +44,11 @@ export async function donateGold(page, answer, amount) {
 
                 // Increase the overall donated gold
                 donateStats.donatedGold += parseInt(amount, 10);
+            } else if (!guildMember) {
+                throw new Error('Check if you belong to a guild!\n');
             }
         }
     } catch (error) {
-        console.error(`\nError during donateGold phase: ${error}\n`);
+        console.error(`Error during donateGold phase: ${error}`);
     }
 }
