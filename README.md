@@ -30,7 +30,7 @@ It was built using *Puppeteer / JavaScript / Node.js*
    - no. of battle
    - overall donated gold
 
-The bot catches 10 errors related to the written code, from which:
+The bot catches 10 errors, from which:
    - handles 5 major errors
    - the rest of 5 medium errors are not disrupting the process of the bot and they can be fixed automatically or manually in the next process
  
