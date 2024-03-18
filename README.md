@@ -4,6 +4,8 @@ This project is an *automation bot* for a browser game.
 
 It was built using *Puppeteer / JavaScript / Node.js*
 
+Logic-Flow: main.js -> mainControl.js -> startBotActions.js -> logIn.js -> attack.js -> adventure.js -> donateGold.js
+
 *The bot is started from Terminal / PowerShell and performs multiple tasks, such as:*
 1. asks the user for username & password
 2. asks for the number of adventures / enemy's name / headless mode(true/false)
