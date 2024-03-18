@@ -38,6 +38,7 @@ The bot catches 10 errors, from which:
 
  
    *Here's a Print Screen of the bot in action:*
+   
  ![image](https://github.com/BenThink/automation-main-bot/assets/28758782/51799d84-3f5f-47f1-b73b-fe30f31a43e2)
 
 
