@@ -6,8 +6,13 @@ export let attackStats = {
     battleNumber: 0
 };
 
+const DELAY = 1000; // delay after enemy's wrong name
+
 // fct to perform the attacks
 export async function attack(page, enemy, answer, amount) {
+    // for check if enemy's name is wrong       
+    let enemyWrong;
+
     try {
         // Wait for the menu items to be available
         await page.waitForSelector(".menu", { timeout: 3000, visible: true });
@@ -33,13 +38,25 @@ export async function attack(page, enemy, answer, amount) {
             // Click on the "Battle" button
             await page.click(".button.submit");
 
-            // Increase battle number
-            attackStats.battleNumber++;
+            // Check if enemy's name is wrong
+            enemyWrong = await page.$('.popup.small');
+
+            if (enemyWrong) {
+                // close pop up message
+                await page.click('.button.close');
+                // wait 1 sec
+                await new Promise(resolve => setTimeout(resolve, DELAY));
+                // throw an error
+                throw new Error(`Enemy's name is wrong!\n`)
+            } else {
+                // Increase battle number
+                attackStats.battleNumber++;
+            }
         }
     } catch (error) {
-        console.error(`\nError during attack phase: ${error}\n`);
+        console.error(`Error during attack phase: ${error}`);
     } finally {
-        // call fct
+        // call fct adventure to continue
         await adventure(page, answer, amount);
     }
 }
