@@ -1,8 +1,8 @@
 import { attack } from './attack.js';
+import { delayMillisec } from '../utilsJs/delayMillisec.js';
 
 
 const MAX_LOGIN_ATTEMPTS = 3; // Max number of attempts to try logging in
-const RETRY_LOGIN_DELAY = 3000; // Delay between login attempts in milliseconds (3000ms = 3s)
 const URL = "https://www.arislegends.com/index.php";
 
 // logs in the user
@@ -12,8 +12,11 @@ export async function logIn(page, username, password, enemy, answer, amount) {
 
     for (let attempt = 1; attempt <= MAX_LOGIN_ATTEMPTS; attempt++) {
         try {
-            // Navigate to the desired URL
-            await page.goto(URL);
+            // waits for both actions to complete
+            await Promise.all([
+                page.waitForNavigation({ waitUntil: 'networkidle0' }), // waits for navig. triggered by 'goto' to finish
+                page.goto(URL)// Navigate to the desired URL
+            ]);
 
             // Wait for the login form to be available
             await page.waitForSelector(".login-form", { timeout: 3000, visible: true });
@@ -43,8 +46,8 @@ export async function logIn(page, username, password, enemy, answer, amount) {
                 console.error('\nAll login attempts failed! Exiting the bot...\n');
                 process.exit(1); // exiting the bot with failure code
             }
-            // Wait 3 sec before trying again
-            await new Promise(resolve => setTimeout(resolve, RETRY_LOGIN_DELAY));
+            // Wait 2 sec before trying again
+            await delayMillisec(2000);
         } finally {
             // if user logged in, calls the attack fct
             if (loggedIn) {
