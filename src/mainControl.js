@@ -3,9 +3,9 @@ import { askQuestionsLetterNr } from "../utilsJs/askQuestionsLetterNr.js";
 import { askQuestionsNumber } from "../utilsJs/askQuestionsNumber.js";
 import { startBotActions } from "./startBotActions.js";
 import { rl } from '../utilsJs/readLine.js';
+import { delayMillisec } from '../utilsJs/delayMillisec.js';
 
 const MAX_RETRY = 3;// tries for entering data
-const DELAY_RETRY = 3000; // delay before trying again to enter data / millisec. to sec.(3)
 
 // fct for user inputs and the core flow/logic of the Bot
 export async function mainControl() {
@@ -45,8 +45,8 @@ export async function mainControl() {
                 process.exit(1); // exiting the bot with failure code    
             }
 
-            // Wait 3 sec before trying again
-            await new Promise(resolve => setTimeout(resolve, DELAY_RETRY));
+            // delay before trying again to enter data / millisec. to sec.(1.5)
+            await delayMillisec(1500);
         } finally {
             if (continueExecution) {
                 await startBotActions(username, password, numberOfRuns, enemy, headlessMode, answer, amount);
