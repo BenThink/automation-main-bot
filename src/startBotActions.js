@@ -3,6 +3,7 @@ import { logIn } from '../actions/logIn.js';
 import { stats } from '../actions/adventure.js';
 import { attackStats } from '../actions/attack.js';
 import { donateStats } from '../actions/donateGold.js';
+import { delayMillisec } from '../utilsJs/delayMillisec.js';
 
 
 // starts the tasks of the Bot
@@ -17,6 +18,7 @@ export async function startBotActions(username, password, numberOfRuns, enemy, h
                 headless: headlessMode === 'true',
                 defaultViewport: false
             });
+
             // Open a new page
             const page = await browser.newPage();
 
@@ -45,6 +47,9 @@ export async function startBotActions(username, password, numberOfRuns, enemy, h
             const logOutButton = await page.waitForSelector('#hmenu > li:nth-child(5) > a', { timeout: 3000, visible: true });
             await logOutButton.click();
 
+            // wait 1.5 sec after log out
+            await delayMillisec(1500);
+
             // close chrome instance
             await browser.close();
 
@@ -52,7 +57,7 @@ export async function startBotActions(username, password, numberOfRuns, enemy, h
             if (i < numberOfRunsInt - 1) {
                 // Wait for the adventure to finish
                 const delay = stats.minTime * 60 * 1000;
-                await new Promise((resolve) => setTimeout(resolve, delay));
+                await delayMillisec(delay);
             }
         }
     } catch (error) {
