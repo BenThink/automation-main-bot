@@ -1,12 +1,11 @@
 import { adventure } from './adventure.js';
+import { delayMillisec } from '../utilsJs/delayMillisec.js';
 
 
 // Define variables for battle number
 export let attackStats = {
     battleNumber: 0
 };
-
-const DELAY = 1000; // delay after enemy's wrong name
 
 // fct to perform the attacks
 export async function attack(page, enemy, answer, amount) {
@@ -15,11 +14,17 @@ export async function attack(page, enemy, answer, amount) {
 
     try {
         // Wait for the menu items to be available
-        await page.waitForSelector(".menu", { timeout: 3000, visible: true });
+        await page.waitForSelector(".menu", { timeout: 3000 });
 
-        // Click on the "Battle" menu
+        // Wait for 'Battle' menu to be available
+        await page.waitForSelector(".menu > li:nth-child(8) > a", { timeout: 3000 });
+
+        // Clicks twice on 'Battle' menu
         await page.click(".menu > li:nth-child(8) > a");
         await page.click(".menu > li:nth-child(8) > a");
+
+        // wait 1.5 seconds
+        await delayMillisec(1500);
 
         // Check if '.battlecountdown' exists
         const battleCountDown = await page.$('.battlecountdown');
@@ -27,7 +32,7 @@ export async function attack(page, enemy, answer, amount) {
         // If '.battlecountdown' does not exist, start a fight
         if (!battleCountDown) {
             // Wait for battle input to be available
-            await page.waitForSelector("input[type='text']", { timeout: 3000, visible: true });
+            await page.waitForSelector("input[type='text']", { timeout: 3000 });
 
             // Clear the existing value in the input field
             await page.$eval('input[type="text"]', input => input.value = '');
@@ -38,14 +43,17 @@ export async function attack(page, enemy, answer, amount) {
             // Click on the "Battle" button
             await page.click(".button.submit");
 
+            // wait 1.5 seconds
+            await delayMillisec(1500);
+
             // Check if enemy's name is wrong
             enemyWrong = await page.$('.popup.small');
 
             if (enemyWrong) {
                 // close pop up message
                 await page.click('.button.close');
-                // wait 1 sec
-                await new Promise(resolve => setTimeout(resolve, DELAY));
+                // delay after enemy's wrong name, 1 sec
+                await delayMillisec(1000);
                 // throw an error
                 throw new Error(`Enemy's name is wrong!\n`)
             } else {
