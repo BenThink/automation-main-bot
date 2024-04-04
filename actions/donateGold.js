@@ -1,3 +1,6 @@
+import { delayMillisec } from '../utilsJs/delayMillisec.js';
+
+
 // Define variable for gold donated
 export let donateStats = {
     donatedGold: 0
@@ -24,6 +27,9 @@ export async function donateGold(page, answer, amount) {
             await page.click("#menu > li:nth-child(3) > a");
             await page.click("#menu > li:nth-child(3) > a");
 
+            // wait 1.5 sec
+            await delayMillisec(1500);
+
             // check if 'guild content' exists
             const guildMember = await page.$('.guildright');
 
@@ -36,6 +42,9 @@ export async function donateGold(page, answer, amount) {
                 // Convert amount from int to string
                 amount = amount.toString();
 
+                // wait for donate input to appear
+                await page.waitForSelector('#donate_currency', { visible: true, timeout: 3000 });
+
                 // Insert the amount of gold to donate
                 await page.type("#donate_currency", amount, { delay: 50 });
 
@@ -44,6 +53,9 @@ export async function donateGold(page, answer, amount) {
 
                 // Increase the overall donated gold
                 donateStats.donatedGold += parseInt(amount, 10);
+
+                // wait 1 sec after donating
+                await delayMillisec(1000);
             } else if (!guildMember) {
                 throw new Error('Check if you belong to a guild!\n');
             }
