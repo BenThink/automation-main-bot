@@ -28,7 +28,7 @@ Logic-Flow: main.js -> mainControl.js -> startBotActions.js -> logIn.js -> attac
    - no. of adventure
    - adventure's time
    - adventure's experience
-   - max. efficiency of the adventure(exp / gold)
+   - max. efficiency of the adventure(exp / time)
    - no. of battle
    - overall donated gold
 
